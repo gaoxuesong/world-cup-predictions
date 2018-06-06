@@ -4,6 +4,19 @@ import itertools
 import operator
 
 
+def WorldCup(object):
+    """World cup object."""
+
+    def __init__(self, filename):
+        """Initalize world cup with a file containing groups and teams."""
+        df = pd.read_csv(filename, index_col='Group')
+        group_ids = 'ABCDEFG'
+        print("test")
+        for gid in group_ids:
+            print(gid)
+            print(df[gid].values)
+
+
 class Group(object):
     """Represents a world cup group."""
 
