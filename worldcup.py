@@ -4,17 +4,18 @@ import itertools
 import operator
 
 
-def WorldCup(object):
+class WorldCup(object):
     """World cup object."""
 
     def __init__(self, filename):
         """Initalize world cup with a file containing groups and teams."""
         df = pd.read_csv(filename, index_col='Group')
         group_ids = 'ABCDEFG'
-        print("test")
-        for gid in group_ids:
-            print(gid)
-            print(df[gid].values)
+        self.groups = []
+        for id in group_ids:
+            teams = df.loc[id].Team.values
+            self.groups.append(Group(id, teams))
+            print(df.loc[id])
 
 
 class Group(object):
