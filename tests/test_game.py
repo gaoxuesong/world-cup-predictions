@@ -7,7 +7,7 @@ def game_example():
     return Game('France', 'Peru')
 
 
-def test_game_creation(game_example):
+def test_creation(game_example):
     assert (
         game_example
         and game_example.team_1 == 'France'
@@ -15,7 +15,7 @@ def test_game_creation(game_example):
     )
 
 
-def test_game_get_teams(game_example):
+def test_get_teams(game_example):
     t1, t2 = game_example.get_teams()
     assert (
         t1 == 'France'

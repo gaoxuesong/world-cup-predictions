@@ -8,14 +8,13 @@ class WorldCup(object):
     """World cup object."""
 
     def __init__(self, filename):
-        """Initalize world cup with a file containing groups and teams."""
+        """Initialize world cup with a file containing groups and teams."""
         df = pd.read_csv(filename, index_col='Group')
-        group_ids = 'ABCDEFG'
+        group_ids = 'ABCDEFGH'
         self.groups = []
         for id in group_ids:
             teams = df.loc[id].Team.values
             self.groups.append(Group(id, teams))
-            print(df.loc[id])
 
 
 class Group(object):
