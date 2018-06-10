@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 import itertools
 import operator
+from gamepredictor import RandomGamePredictor
 
 
 class WorldCup(object):
@@ -15,6 +16,11 @@ class WorldCup(object):
         for id in group_ids:
             teams = df.loc[id].Team.values
             self.groups.append(Group(id, teams))
+
+    def play(self, game_predictor=None):
+        """Play all the games of the world cup."""
+        for g in self.groups:
+            g.play(game_predictor)
 
 
 class Group(object):
@@ -32,10 +38,10 @@ class Group(object):
         for (team_1, team_2) in itertools.combinations(self.teams, 2):
             self.games.append(Game(team_1, team_2))
 
-    def play_all_games(self):
+    def play(self, game_predictor=None):
         """Play all the games of the group."""
         for g in self.games:
-            g.play()
+            g.play(game_predictor)
 
     def get_rankings(self):
         """Return the rankings of the group."""
@@ -65,9 +71,12 @@ class Game(object):
         """Return a tuple of the two teams."""
         return (self.team_1, self.team_2)
 
-    def play(self):
+    def play(self, game_predictor=None):
         """Play a game and record the score."""
-        self.score = (np.random.randint(0, 5), np.random.randint(0, 5))
+        if not game_predictor:
+            game_predictor = RandomGamePredictor()
+        self.score = game_predictor.predict_game(self.team_1, self.team_2)
+        return self.score
 
     def get_points(self):
         """Return the points gained by each team."""

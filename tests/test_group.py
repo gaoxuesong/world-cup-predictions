@@ -26,8 +26,8 @@ def test_initialize_games(group_example):
     )
 
 
-def test_play_all_games(group_example):
-    group_example.play_all_games()
+def test_play(group_example):
+    group_example.play()
     assert group_example.games[0].score
 
 
