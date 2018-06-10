@@ -1,6 +1,14 @@
 # world-cup-predictions
 Predict the results of FIFA World Cup 2018 group stage using historical game results.
 
+## Approach
+
+In current version, a super simplistic approach is used: for a given game, if the two teams met before, the score of the most recent game is predicted. If the teams never met, a 0-0 raw is predicted.
+
+## Dataset
+
+The [results.csv](./results.csv) file comes from the [International football results from 1872 to 2018 Kaggle dataset](https://www.kaggle.com/martj42/international-football-results-from-1872-to-2017), courtesy of [Mart Jürisoo](https://www.kaggle.com/martj42).
+
 ## How to use
 
 Just run the script:
