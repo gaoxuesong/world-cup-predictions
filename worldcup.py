@@ -22,6 +22,15 @@ class WorldCup(object):
         for g in self.groups:
             g.play(game_predictor)
 
+    def get_game(self, team_1, team_2):
+        """Return a game object by team names."""
+        game = None
+        for g in self.groups:
+            game = g.get_game(team_1, team_2)
+            if game:
+                break
+        return game
+
 
 class Group(object):
     """Represents a world cup group."""
@@ -56,6 +65,16 @@ class Group(object):
                           key=operator.itemgetter(1),
                           reverse=True)
         return rankings
+
+    def get_game(self, team_1, team_2):
+        """Return a game object by team names."""
+        game = None
+        for g in self.games:
+            teams = g.get_teams()
+            if (teams == (team_1, team_2) or teams == (team_2, team_1)):
+                game = g
+                break
+        return game
 
 
 class Game(object):

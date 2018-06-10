@@ -46,3 +46,21 @@ def test_get_rankings(group_c_2018):
         and rankings[2] == ('Peru', 2)
         and rankings[3] == ('Denmark', 0)
     )
+
+
+def test_get_game(group_c_2018):
+    """Test the game getter."""
+    group_c_2018.play()
+    france_denmark = group_c_2018.get_game("France", "Denmark")
+    france_denmark_reverse = group_c_2018.get_game("Denmark", "France")
+    assert (
+        france_denmark.score == (3, 0)
+        and france_denmark_reverse.score == (3, 0)
+        and france_denmark == france_denmark_reverse
+    )
+
+
+def test_get_nonexistent_game(group_c_2018):
+    """Test if a non existent game returns None."""
+    g = group_c_2018.get_game("Peru", "Germany")
+    assert g is None
