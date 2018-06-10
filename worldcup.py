@@ -1,5 +1,7 @@
 import pandas as pd
 import numpy as np
+import tabulate as tblt
+from tabulate import tabulate
 import itertools
 import operator
 from gamepredictor import RandomGamePredictor
@@ -30,6 +32,12 @@ class WorldCup(object):
             if game:
                 break
         return game
+
+    def print_game_results(self):
+        """Pretty print the game results for all the groups."""
+        for g in self.groups:
+            g.print_game_results()
+            print("\n")
 
 
 class Group(object):
@@ -75,6 +83,19 @@ class Group(object):
                 game = g
                 break
         return game
+
+    def print_game_results(self):
+        """Pretty print all the group game results."""
+        tblt.PRESERVE_WHITESPACE = True
+        game_results = [
+            ("{:13}".format(g.team_1),
+             "{:13}".format(g.team_2),
+             "{} - {}".format(g.score[0], g.score[1])) for g in self.games]
+        headers = ("Team 1", "Team 2", "Score")
+        group_name = "Group {}".format(self.id)
+        group = tabulate([["{:13}".format(group_name)]], tablefmt='psql')
+        tab = tabulate(game_results, headers=headers, tablefmt='psql')
+        print(group + "\r" + tab)
 
 
 class Game(object):
