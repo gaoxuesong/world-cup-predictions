@@ -17,6 +17,7 @@ def test_creation(worldcup_2018):
     assert worldcup_2018
 
 
-def test_play(worldcup_2018):
-    """Test that all the group games can be played and predicted."""
-    assert worldcup_2018
+def test_historical_score(worldcup_2018):
+    """Test that predicted score is from latest historical game."""
+    g = worldcup_2018.get_game("France", "Denmark")
+    assert g.score == (2, 1)
