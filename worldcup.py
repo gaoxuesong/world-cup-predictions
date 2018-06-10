@@ -74,7 +74,7 @@ class Game(object):
     def play(self, game_predictor=None):
         """Play a game and record the score."""
         if not game_predictor:
-            game_predictor = RandomGamePredictor()
+            game_predictor = RandomGamePredictor(1000)
         self.score = game_predictor.predict_game(self.team_1, self.team_2)
         return self.score
 
