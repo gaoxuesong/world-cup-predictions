@@ -45,3 +45,8 @@ def test_get_points(game_example):
         and t1_win == (2, 0)
         and t2_win == (0, 2)
     )
+
+
+def test_win_expectancy(game_example):
+    """Test the game win expectancy."""
+    assert game_example.win_expectancy() == pytest.approx(0.60, abs=0.01)

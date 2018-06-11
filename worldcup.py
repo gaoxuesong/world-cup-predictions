@@ -127,3 +127,12 @@ class Game(object):
             return (2, 0)
         elif s[0] < s[1]:  # Team 2 wins
             return (0, 2)
+
+    def win_expectancy(self):
+        """Return the win expectancy of team 1."""
+        ratings = pd.read_csv("elo_ratings.csv", index_col=0)
+        rating_1 = ratings.loc[self.team_1].values[0]
+        rating_2 = ratings.loc[self.team_2].values[0]
+        dr = rating_1 - rating_2
+        win_expectancy = 1 / (10**(-dr/400) + 1)
+        return win_expectancy
