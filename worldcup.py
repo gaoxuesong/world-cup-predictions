@@ -90,8 +90,10 @@ class Group(object):
         game_results = [
             ("{:13}".format(g.team_1),
              "{:13}".format(g.team_2),
-             "{} - {}".format(g.score[0], g.score[1])) for g in self.games]
-        headers = ("Team 1", "Team 2", "Score")
+             "{} - {}".format(g.score[0], g.score[1]),
+             "{:17}".format(g.win_expectancy_formatted())
+             ) for g in self.games]
+        headers = ("Team 1", "Team 2", "Score", "Elo Win Expect.")
         group_name = "Group {}".format(self.id)
         group = tabulate([["{:13}".format(group_name)]], tablefmt='psql')
         tab = tabulate(game_results, headers=headers, tablefmt='psql')
