@@ -136,3 +136,11 @@ class Game(object):
         dr = rating_1 - rating_2
         win_expectancy = 1 / (10**(-dr/400) + 1)
         return win_expectancy
+
+    def win_expectancy_formatted(self):
+        """Return the win expectancy conveniently formatted."""
+        we = self.win_expectancy()
+        if we >= 0.50:
+            return "{:.0f}% {}".format(we * 100, self.team_1)
+        else:
+            return "{:.0f}% {}".format((1-we) * 100, self.team_2)

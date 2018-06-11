@@ -50,3 +50,9 @@ def test_get_points(game_example):
 def test_win_expectancy(game_example):
     """Test the game win expectancy."""
     assert game_example.win_expectancy() == pytest.approx(0.60, abs=0.01)
+
+
+def test_win_expectancy_formatted(game_example):
+    """Test the game win expectancy formatted."""
+    target_str = "60% France"
+    assert game_example.win_expectancy_formatted() == target_str
