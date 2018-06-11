@@ -3,7 +3,7 @@ Predict the results of FIFA World Cup 2018 group stage using historical game res
 
 ## Approach
 
-In current version, a super simplistic approach is used: for a given game, if the two teams met before, the score of the most recent game is predicted. If the teams never met, a 0-0 raw is predicted.
+In current version, a super simplistic approach is used: for a given game, if the two teams met before, the score of the most recent game is predicted. If the teams never met, a 0-0 draw is predicted.
 
 ## Dataset
 
