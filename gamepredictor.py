@@ -11,7 +11,7 @@ class BaseGamePredictor(metaclass=ABCMeta):
         """Initialize a GamePredictor object."""
 
     @abstractmethod
-    def predict_game(self, team_1, team_2):
+    def predict_game(self, game):
         """Predict a game result."""
 
 
@@ -22,7 +22,7 @@ class RandomGamePredictor(BaseGamePredictor):
         """Initialize a random game predictor."""
         np.random.seed(seed)
 
-    def predict_game(self, team_1, team_2):
+    def predict_game(self, game):
         """Predict randomly a game with a max number of goals of 5."""
         score = (np.random.randint(0, 5), np.random.randint(0, 5))
         return score
@@ -35,8 +35,10 @@ class HistoricalGamePredictor(BaseGamePredictor):
         """Initialize a predictor from an historical result file."""
         self.results = pd.read_csv(historical_results_file)
 
-    def predict_game(self, team_1, team_2):
+    def predict_game(self, game):
         """Predict the score of the last game between team 1 and team 2."""
+        team_1 = game.team_1
+        team_2 = game.team_2
         df = self.results
 
         def x_team(team):
