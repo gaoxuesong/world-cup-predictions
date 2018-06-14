@@ -57,3 +57,24 @@ class HistoricalGamePredictor(BaseGamePredictor):
             score = (0, 0)
 
         return score
+
+
+class EloRatingGamePredictor(BaseGamePredictor):
+    """Predict score on Elo rating win expectancy and WC average stats."""
+
+    def __init__(self):
+        """Initialize an Elo ratings based predictor."""
+        pass
+
+    def predict_game(self, game):
+        """Predict score based on win expectancy implied by Elo ratings."""
+        we = game.win_expectancy()
+        if we > 0.75:
+            score = (3, 0)
+        elif we > 0.5:
+            score = (2, 1)
+        elif we > 0.25:
+            score = (1, 2)
+        else:
+            score = (0, 3)
+        return score
