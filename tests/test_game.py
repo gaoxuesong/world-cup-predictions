@@ -56,3 +56,9 @@ def test_win_expectancy_formatted(game_example):
     """Test the game win expectancy formatted."""
     target_str = "60% France"
     assert game_example.win_expectancy_formatted() == target_str
+
+
+def test_get_team_elo_ratings(game_example):
+    """Test the Elo ratings getter."""
+    (ratings_1, ratings_2) = game_example.get_teams_elo_ratings()
+    assert ratings_1 == 1987 and ratings_2 == 1915

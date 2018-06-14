@@ -132,9 +132,7 @@ class Game(object):
 
     def win_expectancy(self):
         """Return the win expectancy of team 1."""
-        ratings = pd.read_csv("elo_ratings.csv", index_col=0)
-        rating_1 = ratings.loc[self.team_1].values[0]
-        rating_2 = ratings.loc[self.team_2].values[0]
+        (rating_1, rating_2) = self.get_teams_elo_ratings()
         dr = rating_1 - rating_2
         win_expectancy = 1 / (10**(-dr/400) + 1)
         return win_expectancy
@@ -146,3 +144,10 @@ class Game(object):
             return "{:.0f}% {}".format(we * 100, self.team_1)
         else:
             return "{:.0f}% {}".format((1-we) * 100, self.team_2)
+
+    def get_teams_elo_ratings(self):
+        """Return the teams Elo ratings."""
+        ratings = pd.read_csv("elo_ratings.csv", index_col=0)
+        rating_1 = ratings.loc[self.team_1].values[0]
+        rating_2 = ratings.loc[self.team_2].values[0]
+        return (rating_1, rating_2)
